@@ -52,18 +52,16 @@ class NoteSearchDelegate extends SearchDelegate {
                     color: AppColors.black,
                     align: TextAlign.start,
                   ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NoteDetailScreen(
-                          noteId: note['noteId'],
-                          title: note['title'],
-                          content: note['content'],
-                        ),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NoteDetailScreen(
+                        noteId: note['noteId'],
+                        title: note['title'],
+                        content: note['content'],
                       ),
-                    );
-                  },
+                    ),
+                  ),
                 );
               },
             ),
@@ -96,9 +94,7 @@ class NoteSearchDelegate extends SearchDelegate {
       return [
         IconButton(
           icon: const Icon(Icons.clear),
-          onPressed: () {
-            query = '';
-          },
+          onPressed: () => query = '',
         ),
       ];
     }
@@ -108,9 +104,7 @@ class NoteSearchDelegate extends SearchDelegate {
   Widget? buildLeading(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, null);
-      },
+      onPressed: () => close(context, null),
     );
   }
 }
