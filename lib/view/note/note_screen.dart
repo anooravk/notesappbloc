@@ -35,27 +35,30 @@ class NoteScreen extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.search, color: AppColors.white, size: 30),
-              onPressed: () {
-                showSearch(
-                  context: context,
-                  delegate: NoteSearchDelegate(noteBloc: BlocProvider.of<NoteBloc>(context)),
-                );
-              },
+              onPressed: () => showSearch(
+                context: context,
+                delegate: NoteSearchDelegate(
+                  noteBloc: BlocProvider.of<NoteBloc>(context),
+                ),
+              ),
             ),
           ],
         ),
         body: BlocBuilder<NoteBloc, NoteState>(
           builder: (context, state) {
             if (state is NoteLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
             } else if (state is NoteLoaded) {
               return NoteGridWidget(notes: state.notes);
             } else if (state is NoteError) {
               return NoteErrorWidget(
-                  error: state.error,
-                  onPressed: () {
-                    BlocProvider.of<NoteBloc>(context).add(FetchNotesEvent());
-                  });
+                error: state.error,
+                onPressed: () => BlocProvider.of<NoteBloc>(context).add(
+                  FetchNotesEvent(),
+                ),
+              );
             }
             return const EmptyNotesWidget(
               text: 'No notes available',
