@@ -1,15 +1,16 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notesappbloc/routes/routes.dart';
+import 'package:notesappbloc/routes/routes_name.dart';
 
-import 'login.dart';
-import 'note_bloc.dart';
-import 'note_event.dart';
+import 'bloc/note/note_bloc.dart';
+import 'bloc/note/note_event.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(NotesAppBloc());
+  runApp(const NotesAppBloc());
 }
 
 class NotesAppBloc extends StatelessWidget {
@@ -19,8 +20,9 @@ class NotesAppBloc extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<NoteBloc>(
       create: (context) => NoteBloc()..add(FetchNotesEvent()),
-      child: MaterialApp(
-        home: LoginSignUpScreen(),
+      child: const MaterialApp(
+        initialRoute: RoutesName.loginScreen,
+        onGenerateRoute: Routes.generateRoute,
         debugShowCheckedModeBanner: false,
       ),
     );

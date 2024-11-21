@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notesappbloc/text_widget.dart';
-import 'package:notesappbloc/update_note.dart';
+import 'package:notesappbloc/view/view.dart';
 
-import 'app_colors.dart';
-import 'note_bloc.dart';
-import 'note_state.dart';
+import '../../bloc/note/note_bloc.dart';
+import '../../bloc/note/note_state.dart';
+import '../../components/text_widget.dart';
+import '../../utils/app_colors.dart';
 
 class NoteSearchDelegate extends SearchDelegate {
   final NoteBloc noteBloc;
@@ -56,10 +56,10 @@ class NoteSearchDelegate extends SearchDelegate {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => UpdateNote(
+                        builder: (context) => NoteDetailScreen(
                           noteId: note['noteId'],
-                          currentTitle: note['title'],
-                          currentContent: note['content'],
+                          title: note['title'],
+                          content: note['content'],
                         ),
                       ),
                     );

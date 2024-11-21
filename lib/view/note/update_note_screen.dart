@@ -1,36 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:notesappbloc/app_colors.dart';
-import 'package:notesappbloc/button_widget.dart';
-import 'package:notesappbloc/services.dart';
-import 'package:notesappbloc/text_widget.dart';
+import 'package:notesappbloc/services/note/note_services.dart';
+import 'package:notesappbloc/utils/app_colors.dart';
 
-class AddNotePage extends StatefulWidget {
-  const AddNotePage({super.key});
+import '../../components/button_widget.dart';
+import '../../components/textfield_widget.dart';
+
+class UpdateNote extends StatefulWidget {
+  final String noteId;
+  final String currentTitle;
+  final String currentContent;
+
+  const UpdateNote({
+    super.key,
+    required this.noteId,
+    required this.currentTitle,
+    required this.currentContent,
+  });
 
   @override
-  _AddNotePageState createState() => _AddNotePageState();
+  _UpdateNoteState createState() => _UpdateNoteState();
 }
 
-class _AddNotePageState extends State<AddNotePage> {
+class _UpdateNoteState extends State<UpdateNote> {
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController.text = widget.currentTitle;
+    _contentController.text = widget.currentContent;
+  }
+
   final services = FirebaseServices();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: AppColors.white,
-        title: const CustomText(
-          text: 'Add New Note',
-          weight: FontWeight.w300,
-          size: 26.0,
-          color: AppColors.black,
-          align: TextAlign.start,
-        ),
+        title: const Text('Edit Note'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -39,9 +49,10 @@ class _AddNotePageState extends State<AddNotePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              TextFormField(
+              CustomTextField(
                 controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Title'),
+                labelText: 'Title',
+                maxlines: 1,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a title';
@@ -49,10 +60,10 @@ class _AddNotePageState extends State<AddNotePage> {
                   return null;
                 },
               ),
-              TextFormField(
+              CustomTextField(
                 controller: _contentController,
-                decoration: const InputDecoration(labelText: 'Content'),
-                maxLines: 5,
+                labelText: 'Content',
+                maxlines: 5,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter content for your note';
@@ -66,10 +77,10 @@ class _AddNotePageState extends State<AddNotePage> {
                 textColor: AppColors.white,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    services.saveNote(title: _titleController.text, content: _contentController.text, context: context);
+                    services.updateNote(title: _titleController.text, content: _contentController.text, noteId: widget.noteId, context: context);
                   }
                 },
-                title: 'Save Note',
+                title: 'Save Changes',
               ),
             ],
           ),

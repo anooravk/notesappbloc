@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -23,7 +24,9 @@ class FirebaseServices {
       await _createUserInFirestore(userCredential.user!);
       return userCredential.user;
     } catch (e) {
-      print('Error signing in with Google: $e');
+      if (kDebugMode) {
+        print('Error signing in with Google: $e');
+      }
       return null;
     }
   }
@@ -43,7 +46,9 @@ class FirebaseServices {
       await _createUserInFirestore(userCredential.user!);
       return userCredential.user;
     } catch (e) {
-      print('Error signing in with Apple: $e');
+      if (kDebugMode) {
+        print('Error signing in with Apple: $e');
+      }
       return null;
     }
   }

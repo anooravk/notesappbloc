@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notesappbloc/text_widget.dart';
 
-import 'app_colors.dart';
+import '../../components/text_widget.dart';
+import '../../utils/app_colors.dart';
 
 class NoteDetailScreen extends StatelessWidget {
   final String noteId;
