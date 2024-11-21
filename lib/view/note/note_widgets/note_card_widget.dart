@@ -10,7 +10,9 @@ import 'note_actions_widget.dart';
 
 class NoteCardWidget extends StatelessWidget {
   const NoteCardWidget({super.key, required this.note});
+
   final note;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,17 +20,15 @@ class NoteCardWidget extends StatelessWidget {
       color: AppColors.greyC1C,
       elevation: 5,
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            RoutesName.detailNoteScreen,
-            arguments: {
-              'noteId': note['noteId'],
-              'title': note['title'],
-              'content': note['content'],
-            },
-          );
-        },
+        onTap: () => Navigator.pushNamed(
+          context,
+          RoutesName.detailNoteScreen,
+          arguments: {
+            'noteId': note['noteId'],
+            'title': note['title'],
+            'content': note['content'],
+          },
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -53,20 +53,16 @@ class NoteCardWidget extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomRight,
                 child: NoteActionsWidget(
-                  onEdit: () {
-                    Navigator.pushNamed(
-                      context,
-                      RoutesName.updateNoteScreen,
-                      arguments: {
-                        'noteId': note['noteId'],
-                        'currentTitle': note['title'],
-                        'currentContent': note['content'],
-                      },
-                    );
-                  },
-                  onDelete: () {
-                    BlocProvider.of<NoteBloc>(context).add(DeleteNoteEvent(note['noteId']));
-                  },
+                  onEdit: () => Navigator.pushNamed(
+                    context,
+                    RoutesName.updateNoteScreen,
+                    arguments: {
+                      'noteId': note['noteId'],
+                      'currentTitle': note['title'],
+                      'currentContent': note['content'],
+                    },
+                  ),
+                  onDelete: () => BlocProvider.of<NoteBloc>(context).add(DeleteNoteEvent(note['noteId'])),
                   edit: Icons.edit,
                   delete: Icons.delete,
                 ),
