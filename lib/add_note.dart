@@ -5,6 +5,8 @@ import 'package:notesappbloc/services.dart';
 import 'package:notesappbloc/text_widget.dart';
 
 class AddNotePage extends StatefulWidget {
+  const AddNotePage({super.key});
+
   @override
   _AddNotePageState createState() => _AddNotePageState();
 }
@@ -22,7 +24,7 @@ class _AddNotePageState extends State<AddNotePage> {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.white,
-        title: CustomText(
+        title: const CustomText(
           text: 'Add New Note',
           weight: FontWeight.w300,
           size: 26.0,
@@ -39,7 +41,7 @@ class _AddNotePageState extends State<AddNotePage> {
             children: <Widget>[
               TextFormField(
                 controller: _titleController,
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a title';
@@ -49,7 +51,7 @@ class _AddNotePageState extends State<AddNotePage> {
               ),
               TextFormField(
                 controller: _contentController,
-                decoration: InputDecoration(labelText: 'Content'),
+                decoration: const InputDecoration(labelText: 'Content'),
                 maxLines: 5,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -58,7 +60,7 @@ class _AddNotePageState extends State<AddNotePage> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomButton(
                 bgColor: AppColors.tabColor,
                 textColor: AppColors.white,

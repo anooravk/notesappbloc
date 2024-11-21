@@ -70,7 +70,7 @@ class NoteSearchDelegate extends SearchDelegate {
           );
         }
 
-        return Center(
+        return const Center(
           child: CustomText(
             text: 'No notes found',
             weight: FontWeight.w300,
@@ -95,7 +95,7 @@ class NoteSearchDelegate extends SearchDelegate {
     } else {
       return [
         IconButton(
-          icon: Icon(Icons.clear),
+          icon: const Icon(Icons.clear),
           onPressed: () {
             query = '';
           },
@@ -107,7 +107,7 @@ class NoteSearchDelegate extends SearchDelegate {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () {
         close(context, null);
       },

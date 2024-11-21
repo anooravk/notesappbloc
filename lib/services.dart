@@ -87,7 +87,7 @@ class FirebaseServices {
         await noteRef.update({'noteId': noteId});
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Note added successfully!')),
+          const SnackBar(content: Text('Note added successfully!')),
         );
         Navigator.pop(context);
       }
@@ -116,7 +116,7 @@ class FirebaseServices {
         await _firestore.collection('users').doc(user.uid).collection('notes').doc(noteId).update(updatedNoteData);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Note updated successfully!')),
+          const SnackBar(content: Text('Note updated successfully!')),
         );
         Navigator.pop(context);
       }

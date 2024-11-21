@@ -6,7 +6,8 @@ class UpdateNote extends StatefulWidget {
   final String currentTitle;
   final String currentContent;
 
-  UpdateNote({
+  const UpdateNote({
+    super.key,
     required this.noteId,
     required this.currentTitle,
     required this.currentContent,
@@ -35,7 +36,7 @@ class _UpdateNoteState extends State<UpdateNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Note'),
+        title: const Text('Edit Note'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -46,7 +47,7 @@ class _UpdateNoteState extends State<UpdateNote> {
             children: <Widget>[
               TextFormField(
                 controller: _titleController,
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a title';
@@ -56,7 +57,7 @@ class _UpdateNoteState extends State<UpdateNote> {
               ),
               TextFormField(
                 controller: _contentController,
-                decoration: InputDecoration(labelText: 'Content'),
+                decoration: const InputDecoration(labelText: 'Content'),
                 maxLines: 5,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -65,14 +66,14 @@ class _UpdateNoteState extends State<UpdateNote> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     services.updateNote(title: _titleController.text, content: _contentController.text, noteId: widget.noteId, context: context);
                   }
                 },
-                child: Text('Save Changes'),
+                child: const Text('Save Changes'),
               ),
             ],
           ),

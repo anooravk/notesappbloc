@@ -10,13 +10,15 @@ import 'button_widget.dart';
 class LoginSignUpScreen extends StatelessWidget {
   final services = FirebaseServices();
 
+  LoginSignUpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.white,
-        title: CustomText(
+        title: const CustomText(
           text: 'Login / Sign Up',
           weight: FontWeight.bold,
           size: 25.0,
@@ -45,7 +47,7 @@ class LoginSignUpScreen extends StatelessWidget {
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: CustomText(
                             text: 'Google sign-in failed',
                             weight: FontWeight.bold,
@@ -58,7 +60,7 @@ class LoginSignUpScreen extends StatelessWidget {
                     }
                   },
                   title: "Sign in with Google"),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomButton(
                   bgColor: AppColors.tabColor,
                   textColor: AppColors.white,
@@ -71,7 +73,7 @@ class LoginSignUpScreen extends StatelessWidget {
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: CustomText(
                             text: 'Apple sign-in failed',
                             weight: FontWeight.bold,

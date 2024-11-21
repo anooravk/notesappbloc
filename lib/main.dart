@@ -13,6 +13,8 @@ void main() async {
 }
 
 class NotesAppBloc extends StatelessWidget {
+  const NotesAppBloc({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NoteBloc>(

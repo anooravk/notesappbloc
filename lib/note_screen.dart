@@ -12,6 +12,8 @@ import 'app_colors.dart';
 import 'detail_note.dart';
 
 class NoteScreen extends StatelessWidget {
+  const NoteScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -19,7 +21,7 @@ class NoteScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.white,
         appBar: AppBar(
-          title: CustomText(
+          title: const CustomText(
             text: 'My Notes',
             weight: FontWeight.bold,
             size: 25.0,
@@ -33,7 +35,7 @@ class NoteScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.search,
                   color: AppColors.white,
                   size: 30,
@@ -53,12 +55,12 @@ class NoteScreen extends StatelessWidget {
         body: BlocBuilder<NoteBloc, NoteState>(
           builder: (context, state) {
             if (state is NoteLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is NoteLoaded) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
@@ -81,7 +83,7 @@ class NoteScreen extends StatelessWidget {
                         );
                       },
                       child: Container(
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           color: AppColors.greyC1C,
                           borderRadius: BorderRadius.circular(12),
@@ -89,7 +91,7 @@ class NoteScreen extends StatelessWidget {
                             BoxShadow(
                               color: AppColors.black.withOpacity(0.1),
                               blurRadius: 10,
-                              offset: Offset(0, 4),
+                              offset: const Offset(0, 4),
                             ),
                           ],
                         ),
@@ -103,7 +105,7 @@ class NoteScreen extends StatelessWidget {
                               color: AppColors.white,
                               align: TextAlign.center,
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             CustomText(
                               text: note['content'],
                               weight: FontWeight.w300,
@@ -111,14 +113,14 @@ class NoteScreen extends StatelessWidget {
                               color: AppColors.white,
                               align: TextAlign.center,
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Align(
                               alignment: Alignment.bottomRight,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   IconButton(
-                                    icon: Icon(Icons.edit),
+                                    icon: const Icon(Icons.edit),
                                     onPressed: () {
                                       Navigator.push(
                                         context,
@@ -133,7 +135,7 @@ class NoteScreen extends StatelessWidget {
                                     },
                                   ),
                                   IconButton(
-                                    icon: Icon(Icons.delete),
+                                    icon: const Icon(Icons.delete),
                                     onPressed: () {
                                       BlocProvider.of<NoteBloc>(context).add(DeleteNoteEvent(note['noteId']));
                                     },
@@ -159,7 +161,7 @@ class NoteScreen extends StatelessWidget {
                 ),
               );
             }
-            return Center(
+            return const Center(
               child: CustomText(
                 text: 'No notes available',
                 weight: FontWeight.w300,
@@ -174,11 +176,11 @@ class NoteScreen extends StatelessWidget {
           onPressed: () async {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => AddNotePage()),
+              MaterialPageRoute(builder: (context) => const AddNotePage()),
             );
           },
           backgroundColor: AppColors.tabColor,
-          child: Icon(
+          child: const Icon(
             Icons.add,
             size: 30,
             color: AppColors.white,

@@ -8,7 +8,7 @@ class NoteDetailScreen extends StatelessWidget {
   final String title;
   final String content;
 
-  NoteDetailScreen({required this.noteId, required this.title, required this.content});
+  const NoteDetailScreen({super.key, required this.noteId, required this.title, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +31,14 @@ class NoteDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText(
+            const CustomText(
               text: 'Title:',
               weight: FontWeight.bold,
               size: 20.0,
               color: AppColors.black,
               align: TextAlign.left,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             CustomText(
               text: title,
               weight: FontWeight.w400,
@@ -46,15 +46,15 @@ class NoteDetailScreen extends StatelessWidget {
               color: AppColors.black,
               align: TextAlign.left,
             ),
-            SizedBox(height: 20),
-            CustomText(
+            const SizedBox(height: 20),
+            const CustomText(
               text: 'Content:',
               weight: FontWeight.bold,
               size: 20.0,
               color: AppColors.black,
               align: TextAlign.left,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             CustomText(
               text: content,
               weight: FontWeight.w300,
