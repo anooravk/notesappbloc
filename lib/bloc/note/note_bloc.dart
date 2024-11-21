@@ -14,17 +14,17 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     on<FetchNotesEvent>(_onFetchNotes);
     on<DeleteNoteEvent>(_onDeleteNote);
   }
+  User? user = FirebaseAuth.instance.currentUser;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   void _onFetchNotes(FetchNotesEvent event, Emitter<NoteState> emit) async {
     emit(NoteLoading());
     try {
-      User? user = FirebaseAuth.instance.currentUser;
-
       if (user == null) {
         emit(NoteError('User not authenticated'));
         return;
       }
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).collection('notes').snapshots().listen(
+      await firestore.collection('users').doc(user?.uid).collection('notes').snapshots().listen(
         (snapshot) {
           emit(NoteLoaded(snapshot.docs));
         },
@@ -39,17 +39,15 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
 
   void _onDeleteNote(DeleteNoteEvent event, Emitter<NoteState> emit) async {
     try {
-      User? user = FirebaseAuth.instance.currentUser;
-
       if (user == null) {
         emit(NoteError('User not authenticated'));
         return;
       }
 
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).collection('notes').doc(event.noteId).delete();
+      await firestore.collection('users').doc(user?.uid).collection('notes').doc(event.noteId).delete();
 
       emit(NoteLoading());
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).collection('notes').get().then((snapshot) {
+      await firestore.collection('users').doc(user?.uid).collection('notes').get().then((snapshot) {
         emit(NoteLoaded(snapshot.docs));
       });
     } catch (e) {
