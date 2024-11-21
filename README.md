@@ -1,3 +1,8 @@
+Project Overview
+This Flutter project is a Notes App made with Bloc that allows users to create, read, update, and delete notes. Additionally, it integrates user authentication,
+enabling users to sign in with social media accounts (such as Google or Apple) to manage their notes securely. 
+
+
 Cloning and Setting Up the Project
 
 1. Clone the Project
